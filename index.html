@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perplexity - Ask Anything</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <i data-lucide="zap" class="brand-icon"></i>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-item active">
+                        <i data-lucide="search"></i>
+                        <span>Search</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="monitor"></i>
+                        <span>Computer</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <button class="new-thread-btn" id="newThreadBtn">
+                        <i data-lucide="plus"></i>
+                        <span>New thread</span>
+                    </button>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="history"></i>
+                        <span>History</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="compass"></i>
+                        <span>Discover</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="layers"></i>
+                        <span>Spaces</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="trending-up"></i>
+                        <span>Finance</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="sidebar-bottom">
+                <div class="recent-threads">
+                    <p class="section-label">Recent</p>
+                    <p class="empty-state">Recent and active threads will appear here.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="user-info">
+                        <i data-lucide="user-circle"></i>
+                        <span>Sign In</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="chevron"></i>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="hero-section">
+                <h1 class="hero-logo">perplexity</h1>
+            </div>
+
+            <!-- Search Area -->
+            <div class="search-container">
+                <div class="search-box">
+                    <textarea placeholder="Ask anything..." rows="1"></textarea>
+                    <div class="search-actions">
+                        <div class="action-left">
+                            <input type="file" id="pdfInput" accept=".pdf" style="display: none;">
+                            <button class="action-btn" id="attachBtn"><i data-lucide="paperclip"></i></button>
+                            <button class="action-btn computer-toggle">
+                                <i data-lucide="monitor"></i>
+                                <span>Computer</span>
+                                <i data-lucide="plus" class="small-plus"></i>
+                            </button>
+                        </div>
+                        <div class="action-right">
+                            <button class="action-btn model-selector" id="modelBtn">
+                                <span>Model</span>
+                                <i data-lucide="chevron-down"></i>
+                            </button>
+                            <!-- Model Dropdown Menu -->
+                            <div class="model-menu" id="modelMenu">
+                                <div class="menu-item active">
+                                    <div class="menu-label">Sonar</div>
+                                    <div class="menu-desc">Standard performance</div>
+                                </div>
+                                <div class="menu-group">
+                                    <p class="group-label">Premium Models</p>
+                                    <div class="menu-item">
+                                        <div class="menu-label">Claude 3.5 Sonnet</div>
+                                        <i data-lucide="lock" class="lock-icon"></i>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-label">GPT-4o</div>
+                                        <i data-lucide="lock" class="lock-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="action-btn circle-btn"><i data-lucide="mic"></i></button>
+                            <button class="action-btn circle-btn submit-btn" id="submitBtn">
+                                <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Status Badge (Initially Hidden) -->
+                <div id="pdfBadge" class="pdf-status-badge" style="display: none;">
+                    <i data-lucide="file-text"></i>
+                    <span id="pdfFilename">No file attached</span>
+                    <button id="removePdfBtn">&times;</button>
+                </div>
+
+                <!-- Response Area (Initially Hidden) -->
+                <div class="response-container" id="responseContainer">
+                    <div class="response-header">
+                        <i data-lucide="search" class="response-icon"></i>
+                        <span id="responseQuery"></span>
+                    </div>
+                    <div class="response-body">
+                        <div class="typing-cursor" id="typingIndicator"></div>
+                        <p id="responseText"></p>
+                    </div>
+                </div>
+
+                <!-- Suggestions Section -->
+                <div class="suggestions-section">
+                    <div class="suggestions-header">
+                        <i data-lucide="monitor"></i>
+                        <span>Try Computer</span>
+                    </div>
+                    <div class="pill-buttons">
+                        <button class="pill-btn"><i data-lucide="briefcase"></i> Build a business</button>
+                        <button class="pill-btn"><i data-lucide="list-todo"></i> Organize my life</button>
+                        <button class="pill-btn"><i data-lucide="bar-chart-2"></i> Monitor the situation</button>
+                        <button class="pill-btn"><i data-lucide="lightbulb"></i> Help me learn...</button>
+                    </div>
+                    <ul class="query-list">
+                        <li>Find early customers and draft cold outreach</li>
+                        <li>Build a financial model for my startup</li>
+                        <li>Research my top competitors and break down their strategy</li>
+                        <li>Size the market for my business idea</li>
+                        <li>Write a one-page investor pitch</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
